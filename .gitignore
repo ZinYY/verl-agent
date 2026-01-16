@@ -134,3 +134,5 @@ data/
 
 ./agent_system/environments/env_package/
 agent_system/environments/env_package/
+
+play_data.ipynb
