@@ -4,8 +4,8 @@ ENGINE=${1:-vllm}
 export VLLM_ATTENTION_BACKEND=XFORMERS
 
 # Training configuration
-train_data_size=16
-val_data_size=128
+train_data_size=8
+val_data_size=32    # can set a larger value for more accurate evaluation
 group_size=8
 num_cpus_per_env_worker=0.1
 
