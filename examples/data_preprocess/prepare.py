@@ -28,6 +28,8 @@ if __name__ == '__main__':
     parser.add_argument('--hdfs_dir', default=None)
     parser.add_argument('--train_data_size', default=256, type=int)
     parser.add_argument('--val_data_size', default=256, type=int)
+    parser.add_argument('--train_offset', default=0, type=int)
+    parser.add_argument('--val_offset', default=0, type=int)
 
     args = parser.parse_args()
     print(f"processing data for mode: {args.mode}")
@@ -42,8 +44,8 @@ if __name__ == '__main__':
 
     dataset = datasets.load_dataset(data_source)
 
-    train_dataset = dataset['train'].select(range(args.train_data_size))
-    test_dataset = dataset['test'].select(range(args.val_data_size))
+    train_dataset = dataset['train'].select(range(args.train_offset, args.train_offset + args.train_data_size))
+    test_dataset = dataset['test'].select(range(args.val_offset, args.val_offset + args.val_data_size))
 
     instruction_following = {
         "visual": "<image>",

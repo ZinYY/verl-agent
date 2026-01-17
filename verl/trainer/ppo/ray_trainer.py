@@ -823,7 +823,38 @@ class RayPPOTrainer:
         for k, v in success_rate.items():
             metric_dict[f'val/{k}'] = v
 
+        # Save trajectories for SFT if configured
+        if self.config.trainer.get("save_traj_for_sft", False):
+            self._save_traj_for_sft(sample_inputs, sample_outputs, sample_scores, traj_uids)
+
         return metric_dict
+
+    def _save_traj_for_sft(self, inputs, outputs, scores, traj_uids):
+        """Save successful trajectories as multi-turn chat format for SFT training."""
+        import pandas as pd
+        output_dir = self.config.trainer.get("sft_traj_output_dir", "sft_data")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Group steps by trajectory uid
+        traj_data = {}
+        for inp, out, score, uid in zip(inputs, outputs, scores, traj_uids):
+            if uid not in traj_data:
+                traj_data[uid] = {"messages": [], "final_reward": score}
+            traj_data[uid]["messages"].append({"role": "user", "content": inp})
+            traj_data[uid]["messages"].append({"role": "assistant", "content": out})
+            traj_data[uid]["final_reward"] = score  # last step's reward is episode reward
+        
+        # Filter by reward threshold
+        threshold = self.config.trainer.get("sft_reward_threshold", 0.5)
+        successful = [{"messages": v["messages"]} for v in traj_data.values() 
+                      if v["final_reward"] >= threshold]
+        
+        if successful:
+            df = pd.DataFrame(successful)
+            split = int(len(df) * 0.9)
+            df.iloc[:split].to_parquet(os.path.join(output_dir, "train.parquet"))
+            df.iloc[split:].to_parquet(os.path.join(output_dir, "val.parquet"))
+            pprint(f"Saved {len(successful)} trajectories (threshold={threshold}) to {output_dir}")
 
     def init_workers(self):
         """Initialize distributed training workers using Ray backend.
