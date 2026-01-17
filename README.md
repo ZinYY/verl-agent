@@ -93,6 +93,8 @@ bash examples/grpo_trainer/webshop_qwen_1.5b_full/eval.sh
 
 ### 方法4: GRPO LoRA 微调
 
+注意调整学习率。
+
 ```bash
 # 训练
 bash examples/grpo_trainer/webshop_qwen_7b_lora/train.sh
