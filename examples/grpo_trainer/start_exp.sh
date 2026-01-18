@@ -10,7 +10,7 @@
 
 # For qwen_7b_base (only eval, no training)
 bash examples/grpo_trainer/webshop_qwen_7b_base/eval.sh
-# Result:
+# Result, pass@1:
 # (TaskRunner pid=1811260) step:0 
 # - val/text/test_score:0.035 
 # - val/text/tool_call_count/mean:0.000 
@@ -29,7 +29,7 @@ bash examples/grpo_trainer/webshop_qwen_1.5b_full_SFT/generate.sh
 bash examples/grpo_trainer/webshop_qwen_1.5b_full_SFT/train.sh
 # Step 3: 评估
 bash examples/grpo_trainer/webshop_qwen_1.5b_full_SFT/eval.sh
-# Result:
+# Result, pass@1:
 # (TaskRunner pid=2997566) step:0 
 # - val/text/test_score:0.270 
 # - val/text/tool_call_count/mean:0.000 
@@ -43,13 +43,19 @@ bash examples/grpo_trainer/webshop_qwen_1.5b_full_SFT/eval.sh
 # For qwen_1.5b_full (train with full model, GRPO)
 bash examples/grpo_trainer/webshop_qwen_1.5b_full/train.sh
 bash examples/grpo_trainer/webshop_qwen_1.5b_full/eval.sh
-# Result:
+# Result, pass@1:
 # (TaskRunner pid=1686147) step:0 
 # - val/text/test_score:5.546 
 # - val/text/tool_call_count/mean:0.000 
 # - val/success_rate:0.570 
 # - val/webshop_task_score (not success_rate):0.740
 
+# Result, pass@2:
+# (TaskRunner pid=799422) step:0 
+# - val/text/test_score:8.380 
+# - val/text/tool_call_count/mean:0.000 
+# - val/success_rate:0.628 
+# - val/webshop_task_score (not success_rate):0.775
 
 
 
@@ -59,3 +65,4 @@ bash examples/grpo_trainer/webshop_qwen_1.5b_full/eval.sh
 bash examples/grpo_trainer/webshop_qwen_7b_lora/train.sh
 bash examples/grpo_trainer/webshop_qwen_7b_lora/eval.sh
 # Result:
+结果很差，应该是learning rate没调对，或者lora根本不起效果。

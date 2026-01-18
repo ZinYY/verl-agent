@@ -4,13 +4,14 @@
 
 ## 项目改动
 
-在 verl-agent 的基础上，主要进行了以下修改：
+在 verl-agent 代码仓库的基础上，对以下文件进行了修改：
 
 | 文件 | 改动说明 |
 |------|----------|
 | `examples/data_preprocess/prepare.py` | 添加数据集起始位置参数 (`train_offset`, `val_offset`)，支持分批生成轨迹数据 |
 | `verl/trainer/ppo/ray_trainer.py` | 添加 trajectory 保存功能，支持将成功轨迹保存为 SFT 训练数据 |
 | `examples/grpo_trainer/` | 新增多个实验配置文件夹，包含不同算法的训练/评估脚本 |
+| `verl/trainer/ppo/ray_trainer.py` | 添加pass@k的evaluation功能 |
 
 ## 环境安装
 
@@ -55,6 +56,7 @@ pip3 install vllm==0.8.2
 | **SFT (Imitation Learning)** | 使用 teacher model 生成成功轨迹，进行监督微调 | Qwen2.5-1.5B-Instruct |
 | **GRPO (Full)** | 全量参数微调的 GRPO 强化学习训练 | Qwen2.5-1.5B-Instruct |
 | **GRPO (LoRA)** | 使用 LoRA 的 GRPO 强化学习训练 | Qwen2.5-7B-Instruct |
+|**Eval Pass@k** | 评估模型在 WebShop 测试集上 pass@k 的表现, k=1,2,4,64,128 | ALL |
 
 ## 运行实验
 
@@ -112,7 +114,7 @@ bash examples/grpo_trainer/webshop_qwen_7b_lora/eval.sh
 | Base (Qwen2.5-7B) | 0.4% | 0.025 | 0.035 |
 | SFT (Qwen2.5-1.5B) | 5.0% | 0.174 | 0.270 |
 | GRPO Full (Qwen2.5-1.5B) | **57.0%** | **0.740** | **5.546** |
-| GRPO LoRA (Qwen2.5-7B) | - | - | - |
+| GRPO LoRA (Qwen2.5-7B) | 效果很差 | 估计学习率没调对 | - |
 
 
 ## 项目结构
