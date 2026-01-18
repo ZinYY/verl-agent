@@ -60,6 +60,11 @@ pip3 install vllm==0.8.2
 
 ## 运行实验
 
+### 总览
+```bash
+bash examples/grpo_trainer/start_exp.sh
+```
+
 ### 方法1: Base 评估 (无训练)
 
 直接评估预训练模型在 WebShop 上的表现：
@@ -113,7 +118,8 @@ bash examples/grpo_trainer/webshop_qwen_7b_lora/eval.sh
 |------|--------------|------------|------------|
 | Base (Qwen2.5-7B) | 0.4% | 0.025 | 0.035 |
 | SFT (Qwen2.5-1.5B) | 5.0% | 0.174 | 0.270 |
-| GRPO Full (Qwen2.5-1.5B) | **57.0%** | **0.740** | **5.546** |
+| GRPO Full (Qwen2.5-1.5B) pass@1 | **57.0%** | **0.740** | **5.546** |
+| GRPO Full (Qwen2.5-1.5B) pass@2 | **62.8%** | **0.775** | **8.380** |
 | GRPO LoRA (Qwen2.5-7B) | 效果很差 | 估计学习率没调对 | - |
 
 
