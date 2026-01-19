@@ -120,6 +120,8 @@ bash examples/grpo_trainer/webshop_qwen_7b_lora/eval.sh
 | SFT (Qwen2.5-1.5B) | 5.0% | 0.174 | 0.270 |
 | GRPO Full (Qwen2.5-1.5B) pass@1 | **57.0%** | **0.740** | **5.546** |
 | GRPO Full (Qwen2.5-1.5B) pass@2 | **62.8%** | **0.775** | **8.380** |
+| GRPO Full (Qwen2.5-1.5B) pass@4 | **62.8%** | **0.775** | **9.800** |
+| GRPO Full (Qwen2.5-1.5B) pass@64 | **70.0%** | **0.816** | **10.000** |
 | GRPO LoRA (Qwen2.5-7B) | 效果很差 | 估计学习率没调对 | 或者LoRA没用 |
 
 

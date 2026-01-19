@@ -57,7 +57,19 @@ bash examples/grpo_trainer/webshop_qwen_1.5b_full/eval.sh
 # - val/success_rate:0.628 
 # - val/webshop_task_score (not success_rate):0.775
 
+# Result, pass@4:
+# (TaskRunner pid=930943) step:0 
+# - val/text/test_score:9.800 
+# - val/text/tool_call_count/mean:0.000 
+# - val/success_rate:0.628 
+# - val/webshop_task_score (not success_rate):0.775
 
+# Result, pass@64:
+# (TaskRunner pid=1079076) step:0 
+# - val/text/test_score:10.000 
+# - val/text/tool_call_count/mean:0.000 
+# - val/success_rate:0.700 
+# - val/webshop_task_score (not success_rate):0.816
 
 ###################### GRPO (LoRA微调版本) ########################
 
